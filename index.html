@@ -5,41 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VanillaMC Store</title>
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
   <header>
     <div class="logo">VanillaMC</div>
-    <div class="server-info">
-      play.vanillamc.fun<br>
-      Public Minecraft Server • Store
-    </div>
     <nav>
-      <button onclick="openDiscord()">Discord</button>
+      <a href="#">play.vanillamc.fun</a>
+      <span>Public Minecraft Server • Store</span>
+      <button onclick="window.open('https://discord.gg/dRewDxQWh7','_blank')">Discord</button>
     </nav>
   </header>
 
   <main>
-    <aside class="sidebar">
-      <h3>SELECT A CATEGORY</h3>
-      <div class="category"><img src="https://via.placeholder.com/30" alt="coins"> Coins [LifeSteal]</div>
-      <div class="category"><img src="https://via.placeholder.com/30" alt="ranks"> Lifesteal Ranks</div>
-      <div class="category"><img src="https://via.placeholder.com/30" alt="coins"> Coins [Classic]</div>
-      <div class="category"><img src="https://via.placeholder.com/30" alt="classic"> Classic Ranks</div>
+    <aside>
+      <h2>Select a Category</h2>
+      <div class="category"><img src="images/coins.png" alt="coins"> Coins [LifeSteal]</div>
+      <div class="category"><img src="images/ranks.png" alt="ranks"> Lifesteal Ranks</div>
+      <div class="category"><img src="images/coins2.png" alt="coins2"> Coins [Classic]</div>
+      <div class="category"><img src="images/classic.png" alt="classic"> Classic Ranks</div>
     </aside>
 
-    <section class="content">
+    <section>
       <h2>Featured Packages</h2>
-      <div class="card" onclick="select('GOD Rank (+3600 Coins)', '27.00 USD')">
-        <h4>GOD Rank (+3600 Coins)</h4>
-        <p class="price">27.00 USD</p>
+      <div class="package">
+        <h3>GOD Rank (+3600 Coins)</h3>
+        <p>27.00 USD</p>
+        <button class="cart-btn" onclick="addToCart('GOD Rank (+3600 Coins)', '27.00')">Add to Cart</button>
       </div>
-      <div class="card" onclick="select('15600 Coins (LifeSteal)', '12.20 USD')">
-        <h4>15600 Coins (LifeSteal)</h4>
-        <p class="price">12.20 USD</p>
+      <div class="package">
+        <h3>15600 Coins (LifeSteal)</h3>
+        <p>12.20 USD</p>
+        <button class="cart-btn" onclick="addToCart('15600 Coins (LifeSteal)', '12.20')">Add to Cart</button>
       </div>
 
       <h2>Support</h2>
-      <p>Need help? Contact us on Discord or email: <a href="mailto:contactvanillamc@gmail.com">contactvanillamc@gmail.com</a></p>
+      <p>Need help? Contact us:</p>
+      <ul>
+        <li>📞 Phone: +880 1763221574</li>
+        <li>💬 Discord: <a href="https://discord.gg/dRewDxQWh7" target="_blank">Join our Discord</a></li>
+        <li>📧 Email: <a href="mailto:bd.tiz.alone@gmail.com">bd.tiz.alone@gmail.com</a></li>
+      </ul>
 
       <h2>Refund Policy</h2>
       <p>All payments are final and non-refundable. Attempting a chargeback will result in permanent banishment.</p>
@@ -50,7 +56,5 @@
     <p>Copyright © VanillaMC 2025. All Rights Reserved.</p>
     <p>We are not affiliated with Mojang AB.</p>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>

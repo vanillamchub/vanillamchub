@@ -1,6 +1,6 @@
-function openDiscord() {
-  alert('Redirect to Discord server link');
-}
-function select(title, price) {
-  alert('Selected: ' + title + ' — ' + price + '\n(Replace with checkout flow)');
+let cart = [];
+
+function addToCart(item, price) {
+  cart.push({item, price});
+  alert(item + " added to cart! (Total items: " + cart.length + ")");
 }
