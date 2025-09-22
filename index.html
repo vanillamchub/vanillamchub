@@ -85,6 +85,18 @@
   </div>
 
   <!-- Payment Methods -->
+  <div id="payment-section" style="display:none; margin-top:20px;">
+  <h2>Select Payment Method</h2>
+  <button onclick="choosePayment('Bkash')">Bkash</button>
+  <button onclick="choosePayment('Nagad')">Nagad</button>
+
+  <div id="payment-input" style="display:none; margin-top:10px;">
+    <label id="number-label"></label><br>
+    <input type="text" id="payment-number" placeholder="Enter number">
+    <button onclick="confirmPayment()">Confirm Payment</button>
+  </div>
+</div>
+
   <div class="payment">
     <h2>Payment Methods</h2>
     <img src="https://i.ibb.co/Jq5Hhd1/bkash.png" alt="Bkash">
