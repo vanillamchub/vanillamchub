@@ -4,28 +4,71 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VanillaMC Store</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .package-box {
+      background: #222;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px auto;
+      width: 90%;
+      max-width: 800px;
+      min-height: 180px;
+    }
+    button {
+      padding: 8px 14px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .add { background: orange; }
+    .delete { background: crimson; color: white; }
+    .buy { background: limegreen; }
+    .cancel { background: gray; color: white; }
+    #cart {
+      margin-top: 30px;
+      padding: 15px;
+      background: #1b1b1b;
+      border-radius: 10px;
+    }
+    #cart-list li {
+      margin: 5px 0;
+      padding: 5px;
+      background: #333;
+      border-radius: 5px;
+    }
+    .payment {
+      margin-top: 20px;
+      padding: 10px;
+      background: #222;
+      border-radius: 10px;
+    }
+    .payment img {
+      width: 100px;
+      margin: 10px;
+    }
+    #payment-section {
+      margin-top: 20px;
+      display: none;
+    }
+    #payment-input {
+      display: none;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>🍃 VanillaMC Store</h1>
-  </header>
 
-  <main>
-    <aside>
-      <h2>Select a Category</h2>
-      <div class="category" onclick="filterCategory('lifesteal')">
-        <img src="images/netherite-sword.gif" alt="lifesteal"> Lifesteal Ranks
-      </div>
-       <div class="category" onclick="filterCategory('Coins')">
-       <img src="images/doge-coin.png" alt="coins"> Coins
-       </div> 
-        <div class="category" onclick="filterCategory('classic')">
-        <img src="images/grass-block.png" alt="classic"> Classic Ranks
-        </div>
-      <h3 id="cart-counter">🛒 Cart: 0 items selected</h3>
-    </aside>
+  <h1>VanillaMC Store</h1>
 
+  <!-- Packages -->
   <div class="package-box">
     <h3>GOD Rank (+3600 Coins)</h3>
     <p>2700 BDT</p>
@@ -39,21 +82,6 @@
     <button class="add" onclick="addToCart('15600 Coins (LifeSteal)', 1220)">Add to Cart</button>
     <button class="delete" onclick="removeFromCart('15600 Coins (LifeSteal)')">Delete</button>
   </div>
-
-
-      <div class="package" data-category="lifesteal">
-        <h3>15600 Coins </h3>
-        <p>200 Inr</p>
-        <button class="cart-btn" onclick="addToCart('15600 Coins (LifeSteal)', '12.20')">Add to Cart</button> Remove From Cart </deletebutton>
-        <button class="delete" onclick="removeFromCart('15600 Coins (LifeSteal)')">Delete</button>
-      </div>
-
-      <div class="package" data-category="classic">
-        <h3>Classic Rank</h3>
-        <p>100 Inr</p>
-        <button class="cart-btn" onclick="addToCart('God Rank', '15.00')">Add to Cart</button>
-        <button class="delete" onclick="removeFromCart('GOD Rank (+3600 Coins)')">Delete</button>
-      </div>
 
   <!-- Cart Section -->
   <div id="cart">
@@ -82,16 +110,81 @@
     <img src="https://i.ibb.co/Jq5Hhd1/bkash.png" alt="Bkash">
     <img src="https://i.ibb.co/z5GMMW3/nagad.png" alt="Nagad">
   </div>
-    </section>
-  </main>
 
-  <footer>
-    <p>Support:<br>
-    Phone: +880 1763221574<br>
-    Discord: <a href="https://discord.gg/dRewDxQWh7" target="_blank">Join Our Discord</a><br>
-    Email: <a href="mailto:bd.tiz.alone@gmail.com">bd.tiz.alone@gmail.com</a></p>
-  </footer>
+  <script>
+    let cart = [];
+    let selectedPayment = "";
 
-  <script src="script.js"></script>
+    // Add item
+    function addToCart(item, price) {
+      if (!cart.find(p => p.item === item)) {
+        cart.push({item, price});
+      } else {
+        alert(`${item} is already in cart!`);
+      }
+      updateCart();
+    }
+
+    // Remove item
+    function removeFromCart(item) {
+      cart = cart.filter(p => p.item !== item);
+      updateCart();
+    }
+
+    // Cancel cart
+    function cancelCart() {
+      cart = [];
+      updateCart();
+    }
+
+    // Update cart UI
+    function updateCart() {
+      const list = document.getElementById("cart-list");
+      const total = document.getElementById("total");
+      list.innerHTML = "";
+      let sum = 0;
+      cart.forEach(p => {
+        const li = document.createElement("li");
+        li.innerText = `${p.item} - ${p.price} BDT`;
+        list.appendChild(li);
+        sum += p.price;
+      });
+      total.innerText = `Total: ${sum.toFixed(2)} BDT`;
+    }
+
+    // BUY button → show payment methods
+    function buyCart() {
+      if (cart.length === 0) {
+        alert("Cart is empty!");
+        return;
+      }
+      document.getElementById('payment-section').style.display = 'block';
+    }
+
+    // Choose payment method
+    function choosePayment(method) {
+      selectedPayment = method;
+      document.getElementById('payment-input').style.display = 'block';
+      document.getElementById('number-label').innerText = `Enter your ${method} Number:`;
+    }
+
+    // Confirm payment
+    function confirmPayment() {
+      const number = document.getElementById('payment-number').value;
+      if (!number) {
+        alert("Please enter your number!");
+        return;
+      }
+      const total = cart.reduce((a,b)=>a+b.price,0).toFixed(2);
+      alert(`Payment Method: ${selectedPayment}\nNumber: ${number}\nTotal: ${total} BDT`);
+      // Clear cart
+      cart = [];
+      updateCart();
+      document.getElementById('payment-section').style.display = 'none';
+      document.getElementById('payment-input').style.display = 'none';
+      document.getElementById('payment-number').value = '';
+    }
+  </script>
+
 </body>
 </html>
