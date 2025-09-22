@@ -4,59 +4,135 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VanillaMC Store</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .package-box {
+      background: #222;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px auto;
+      width: 90%;
+      max-width: 800px;
+      min-height: 180px;
+    }
+    button {
+      padding: 8px 14px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .add { background: orange; }
+    .delete { background: crimson; color: white; }
+    .buy { background: limegreen; }
+    .cancel { background: gray; color: white; }
+    #cart {
+      margin-top: 30px;
+      padding: 15px;
+      background: #1b1b1b;
+      border-radius: 10px;
+    }
+    .payment {
+      margin-top: 20px;
+      padding: 10px;
+      background: #222;
+      border-radius: 10px;
+    }
+    .payment img {
+      width: 100px;
+      margin: 10px;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>🍃 VanillaMC Store</h1>
-  </header>
 
-  <main>
-    <aside>
-      <h2>Select a Category</h2>
-      <div class="category" onclick="filterCategory('lifesteal')">
-        <img src="images/netherite-sword.gif" alt="lifesteal"> Lifesteal Ranks
-      </div>
-      <div class="category" onclick="filterCategory('lifesteal')">
-        <img src="images/doge-coin.png" alt="coins"> Lifesteal Coins
-      </div>
-      <div class="category" onclick="filterCategory('classic')">
-        <img src="images/grass-block.png" alt="classic"> Classic Ranks
-      </div>
-      <h3 id="cart-counter">🛒 Cart: 0 items selected</h3>
-    </aside>
+  <h1>VanillaMC Store</h1>
 
-    <section id="packages">
-      <h2>Featured Packages</h2>
+  <!-- Packages -->
+  <div class="package-box">
+    <h3>GOD Rank (+3600 Coins)</h3>
+    <p>27.00 USD</p>
+    <button class="add" onclick="addToCart('GOD Rank (+3600 Coins)', 27)">Add to Cart</button>
+    <button class="delete" onclick="removeFromCart('GOD Rank (+3600 Coins)')">Delete</button>
+  </div>
 
-      <div class="package" data-category="lifesteal">
-        <h3>GOD Rank (+3600 Coins)</h3>
-        <p>27.00 USD</p>
-        <button class="cart-btn" onclick="addToCart('GOD Rank (+3600 Coins)', '27.00')">Add to Cart</button>
-      </div>
+  <div class="package-box">
+    <h3>15600 Coins (LifeSteal)</h3>
+    <p>12.20 USD</p>
+    <button class="add" onclick="addToCart('15600 Coins (LifeSteal)', 12.20)">Add to Cart</button>
+    <button class="delete" onclick="removeFromCart('15600 Coins (LifeSteal)')">Delete</button>
+  </div>
 
-      <div class="package" data-category="lifesteal">
-        <h3>15600 Coins (LifeSteal)</h3>
-        <p>12.20 USD</p>
-        <button class="cart-btn" onclick="addToCart('15600 Coins (LifeSteal)', '12.20')">Add to Cart</button>
-      </div>
+  <!-- Cart Section -->
+  <div id="cart">
+    <h2>🛒 Your Cart</h2>
+    <ul id="cart-list"></ul>
+    <p id="total">Total: 0 USD</p>
+    <button class="buy" onclick="buyCart()">BUY</button>
+    <button class="cancel" onclick="cancelCart()">Cancel</button>
+  </div>
 
-      <div class="package" data-category="classic">
-        <h3>Classic Rank</h3>
-        <p>15.00 USD</p>
-        <button class="cart-btn" onclick="addToCart('Classic Rank', '15.00')">Add to Cart</button>
-      </div>
+ <!-- Payment Methods -->
+<div class="payment">
+  <h2>Payment Methods</h2>
+  <div>
+    <img src="https://i.ibb.co/Jq5Hhd1/bkash.png" alt="Bkash">
+    <p><b>Bkash Number:</b> 017XXXXXXXX</p>
+  </div>
+  <div>
+    <img src="https://i.ibb.co/z5GMMW3/nagad.png" alt="Nagad">
+    <p><b>Nagad Number:</b> 018XXXXXXXX</p>
+  </div>
+</div>
 
-    </section>
-  </main>
 
-  <footer>
-    <p>Support:<br>
-    Phone: +880 1763221574<br>
-    Discord: <a href="https://discord.gg/dRewDxQWh7" target="_blank">Join Our Discord</a><br>
-    Email: <a href="mailto:bd.tiz.alone@gmail.com">bd.tiz.alone@gmail.com</a></p>
-  </footer>
+  <script>
+    let cart = [];
 
-  <script src="script.js"></script>
+    function addToCart(item, price) {
+      cart.push({item, price});
+      updateCart();
+    }
+
+    function removeFromCart(item) {
+      cart = cart.filter(p => p.item !== item);
+      updateCart();
+    }
+
+    function cancelCart() {
+      cart = [];
+      updateCart();
+    }
+
+    function buyCart() {
+      if (cart.length === 0) {
+        alert("Cart is empty!");
+        return;
+      }
+      alert("Proceeding to payment...");
+    }
+
+    function updateCart() {
+      const list = document.getElementById("cart-list");
+      const total = document.getElementById("total");
+      list.innerHTML = "";
+      let sum = 0;
+      cart.forEach(p => {
+        let li = document.createElement("li");
+        li.innerText = `${p.item} - ${p.price} USD`;
+        list.appendChild(li);
+        sum += p.price;
+      });
+      total.innerText = `Total: ${sum.toFixed(2)} USD`;
+    }
+  </script>
+
 </body>
 </html>
+
