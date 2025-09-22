@@ -2,28 +2,8 @@ let cart = [];
 
 // Add item to cart
 function addToCart(item, price) {
-  // Duplicate check
-  if (!cart.find(p => p.item === item)) {
-    cart.push({item, price});
-    updateCart();
-  } else {
-    alert(`${item} is already in cart!`);
-  }
-}
-
-// Update Cart UI
-function updateCart() {
-  const list = document.getElementById("cart-list");
-  const total = document.getElementById("total");
-  list.innerHTML = "";
-  let sum = 0;
-  cart.forEach(p => {
-    const li = document.createElement("li");
-    li.innerText = `${p.item} - ${p.price} USD`;
-    list.appendChild(li);
-    sum += p.price;
-  });
-  total.innerText = `Total: ${sum.toFixed(2)} USD`;
+  cart.push({item, price});
+  updateCart();
 }
 
 // Remove item from cart
@@ -38,13 +18,50 @@ function cancelCart() {
   updateCart();
 }
 
-// Buy cart items
+// Buy cart items → Show payment options
 function buyCart() {
   if (cart.length === 0) {
     alert("Cart is empty!");
     return;
   }
-  const items = cart.map(p => p.item).join(", ");
-  const total = cart.reduce((sum, p) => sum + p.price, 0).toFixed(2);
-  alert(`Proceeding to payment for:\n${items}\nTotal: ${total} USD`);
+  document.getElementById('payment-section').style.display = 'block';
+}
+
+// Update Cart UI
+function updateCart() {
+  const list = document.getElementById("cart-list");
+  const total = document.getElementById("total");
+  list.innerHTML = "";
+  let sum = 0;
+  cart.forEach(p => {
+    const li = document.createElement("li");
+    li.innerText = `${p.item} - ${p.price} BDT`; // USD → BDT
+    list.appendChild(li);
+    sum += p.price;
+  });
+  total.innerText = `Total: ${sum.toFixed(2)} BDT`; // USD → BDT
+}
+
+// Payment Section
+let selectedPayment = "";
+
+function choosePayment(method) {
+  selectedPayment = method;
+  document.getElementById('payment-input').style.display = 'block';
+  document.getElementById('number-label').innerText = `Enter your ${method} Number:`;
+}
+
+function confirmPayment() {
+  const number = document.getElementById('payment-number').value;
+  if (!number) {
+    alert("Please enter your number!");
+    return;
+  }
+  const total = cart.reduce((a,b)=>a+b.price,0).toFixed(2);
+  alert(`Payment Method: ${selectedPayment}\nNumber: ${number}\nTotal: ${total} BDT`);
+  cart = [];
+  updateCart();
+  document.getElementById('payment-section').style.display = 'none';
+  document.getElementById('payment-input').style.display = 'none';
+  document.getElementById('payment-number').value = '';
 }
