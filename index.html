@@ -50,8 +50,33 @@
         <button class="delete" onclick="removeFromCart('GOD Rank (+3600 Coins)')">Delete</button>
       </div>
 
-      <div class="package" data-category="Cart">
+  <!-- Cart Section -->
+  <div id="cart">
+    <h2>🛒 Your Cart</h2>
+    <ul id="cart-list"></ul>
+    <p id="total">Total: 0 BDT</p>
+    <button class="buy" onclick="buyCart()">BUY</button>
+    <button class="cancel" onclick="cancelCart()">Cancel</button>
+  </div>
 
+  <!-- Payment Methods -->
+  <div id="payment-section">
+    <h2>Select Payment Method</h2>
+    <button onclick="choosePayment('Bkash')">Bkash</button>
+    <button onclick="choosePayment('Nagad')">Nagad</button>
+
+    <div id="payment-input">
+      <label id="number-label"></label><br>
+      <input type="text" id="payment-number" placeholder="Enter number">
+      <button onclick="confirmPayment()">Confirm Payment</button>
+    </div>
+  </div>
+
+  <div class="payment">
+    <h2>Payment Methods</h2>
+    <img src="https://i.ibb.co/Jq5Hhd1/bkash.png" alt="Bkash">
+    <img src="https://i.ibb.co/z5GMMW3/nagad.png" alt="Nagad">
+  </div>
     </section>
   </main>
 
