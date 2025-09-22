@@ -3,43 +3,114 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>My Website</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>VanillaMC Store</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    a.button {
+      display: inline-block;
+      margin: 10px 0;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    a.button:hover {
+      background-color: #45a049;
+    }
+    .ranks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .rank-card {
+      flex: 1 1 200px;
+      background-color: white;
+      border: 2px solid #4CAF50;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    }
+    .rank-card h3 {
+      margin: 10px 0;
+      color: #4CAF50;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      margin-top: 30px;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>Welcome!</h1>
-    <p>This is my first free website 🚀</p>
-    <nav>
-      <a href="#about">About Me</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <h1>VanillaMC Store</h1>
+    <p>Buy ranks and connect with us!</p>
   </header>
 
   <main>
-    <section id="about">
-      <h2>About Me</h2>
-      <p>I am a creator/developer. Here you can find information about my projects and work.</p>
-    </section>
+    <h2>Server Info</h2>
+    <p><strong>IP:</strong> play.vanillamc.fun</p>
 
-    <section id="projects">
-      <h2>My Projects</h2>
-      <ul>
-        <li>🌕 Moon Mission Simulator</li>
-        <li>🕹️ Horror Escape Game</li>
-        <li>🎮 Minecraft Lifesteal Server</li>
-      </ul>
-    </section>
+    <h2>Store</h2>
+    <p><a class="button" href="https://vanillamcstore.com" target="_blank">Visit Store</a></p>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>📧 Email: <a href="mailto:example@mail.com">example@mail.com</a></p>
-    </section>
+    <h2>Ranks</h2>
+    <div class="ranks">
+      <div class="rank-card">
+        <h3>Fighter</h3>
+        <p>Basic starter rank</p>
+      </div>
+      <div class="rank-card">
+        <h3>Boss</h3>
+        <p>Advanced player rank</p>
+      </div>
+      <div class="rank-card">
+        <h3>Elite</h3>
+        <p>Elite privileges and perks</p>
+      </div>
+      <div class="rank-card">
+        <h3>God</h3>
+        <p>Powerful rank with special commands</p>
+      </div>
+      <div class="rank-card">
+        <h3>Prime</h3>
+        <p>Exclusive access and perks</p>
+      </div>
+      <div class="rank-card">
+        <h3>Hyper</h3>
+        <p>Top-tier ultimate rank</p>
+      </div>
+    </div>
+
+    <h2>Contact</h2>
+    <p>Phone: +88017632215774</p>
+    <p>Discord: <a href="https://discord.gg/dRewDxQWh7" target="_blank">Join Discord</a></p>
   </main>
 
   <footer>
-    <p>© 2025 My Website</p>
+    © 2025 VanillaMC
   </footer>
 </body>
 </html>
