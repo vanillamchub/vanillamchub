@@ -38,6 +38,12 @@
       background: #1b1b1b;
       border-radius: 10px;
     }
+    #cart-list li {
+      margin: 5px 0;
+      padding: 5px;
+      background: #333;
+      border-radius: 5px;
+    }
     .payment {
       margin-top: 20px;
       padding: 10px;
@@ -108,7 +114,9 @@
         alert("Cart is empty!");
         return;
       }
-      alert("Proceeding to payment...");
+      const items = cart.map(p => p.item).join(", ");
+      const total = cart.reduce((sum, p) => sum + p.price, 0).toFixed(2);
+      alert(`Proceeding to payment for:\n${items}\nTotal: ${total} USD`);
     }
 
     function updateCart() {
@@ -117,7 +125,7 @@
       list.innerHTML = "";
       let sum = 0;
       cart.forEach(p => {
-        let li = document.createElement("li");
+        const li = document.createElement("li");
         li.innerText = `${p.item} - ${p.price} USD`;
         list.appendChild(li);
         sum += p.price;
@@ -128,3 +136,4 @@
 
 </body>
 </html>
+
